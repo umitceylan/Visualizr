@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+
+<h1>FOR SALE</h1>
+
+<ul>   
+{{for image in list:}}    
+{{= LI(A(image.title,  _href=URL("show", args = image.id)))}}
+{{pass}}    
+</ul>
+</br>
+<h2>{{ = A("Create a New Ad" , _href = URL("post_new_ad", args= image.id))}}</h2>

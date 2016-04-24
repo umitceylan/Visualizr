@@ -1,0 +1,25 @@
+{{extend 'layout.html'}}
+
+<h3>Seller's Name: {{=image.name}}</h3>
+
+<h3>Contact      : {{=image.phone_number}} </h3>
+
+<h3>Email        : {{=image.email}}</h3>
+
+<h3>Date Posted  : {{=image.date}}</h3>
+
+<h1>{{=image.title}}</h1>
+
+<p>Description: {{ =image.description}}</p>
+
+<div style = "text_align:center">
+    <img width = "200px"
+         src = "{{=URL('download', args = image.file)}}"/>
+         
+</div>
+
+<h3>Category    : {{=image.category}}</h3>
+
+<h3>Price       : ${{=image.price}}</h3>
+
+<h3>Status      : {{=image.status}}</h3>
