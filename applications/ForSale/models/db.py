@@ -12,18 +12,20 @@ db.define_table("image",
    Field("name"),
    Field("phone_number"),
    Field("email"),
-   Field("date"),             
+   Field("date"),
    Field("title", unique=True),
    Field("description", "text"),
    Field("file", "upload"),
-   Field("category"), 
+   Field("category"),
    Field("price", "double"),
-   Field("status", default = False), 
+   Field("status", default = False),
    format = '%(title)s')
+
+db.define_table("test", SQLField('file','upload'),SQLField('filename'))
 
 db.define_table('post',
    Field('image_id', 'reference image'))
-   
+
 db.post.image_id.requires = IS_IN_DB(db, db.image.id, '%(title)s')
 
 db.image.email.requires = IS_EMAIL()
@@ -40,6 +42,6 @@ db.image.status.requires = IS_IN_SET(["Sold", "Still Available"])
 db.post.image_id.writable = db.post.image_id.readable = False
 
 
-from gluon.tools import Auth
+from gluon.tools import Auth, current
 auth = Auth(db)
 auth.define_tables(username = False, signature = False)

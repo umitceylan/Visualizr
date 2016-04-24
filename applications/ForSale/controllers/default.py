@@ -5,6 +5,7 @@
 # 2/3/2016
 #########################################################################
 
+
 def index():
     list = db().select(db.image.ALL, orderby = db.image.title)
     return dict(list = list)
@@ -19,8 +20,22 @@ def post_new_ad():
     if form.process().accepted:
         response.flash = "Contratulations!"
         response.flash = "You have successfuly posted your ad!"
-        
+
     return dict(form =form)
+
+def create_table(form):
+    print form.vars.file.file.readline()
+    print form.vars.id
+    # actually, have to do the form creation manually, can't put directly into table.  bbs
+
+def test():
+    form=SQLFORM(db.test,fields=['file'])
+    # if request.vars.file!=None:
+    #     form.vars.filename=strip_path_and_sanitize(request.vars.file.filename)
+    if form.process(onvalidation=create_table).accepted:
+        response.flash='success!'
+    return dict(form=form)
+
 
 def user():
     """

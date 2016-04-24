@@ -2,10 +2,11 @@
 
 <h1>FOR SALE</h1>
 
-<ul>   
-{{for image in list:}}    
+<ul>
+{{for image in list:}}
 {{= LI(A(image.title,  _href=URL("show", args = image.id)))}}
-{{pass}}    
+{{pass}}
 </ul>
 </br>
 <h2>{{ = A("Create a New Ad" , _href = URL("post_new_ad", args= image.id))}}</h2>
+<h2>{{ = A("Test a new test", _href = URL("test"))}}</h2>
