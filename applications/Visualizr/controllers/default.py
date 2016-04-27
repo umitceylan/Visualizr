@@ -8,6 +8,7 @@
 # - download is for downloading files uploaded in the db (does streaming)
 # -------------------------------------------------------------------------
 
+import os
 
 def index():
     """
@@ -58,4 +59,12 @@ def call():
     """
     return service()
 
-
+def upload_data():
+    form = SQLFORM.factory(
+        Field('upload_data', 'upload', uploadfolder=os.path.join(request.folder, 'static')))
+    if form.process().accepted:
+        response.flash = 'form accepted'
+        session.upload_data = form.vars.upload_data
+    elif form.errors:
+        response.flash = 'Upload form Error'
+    return dict(form = form)
