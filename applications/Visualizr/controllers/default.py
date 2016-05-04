@@ -18,8 +18,10 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
+    userlist = db(db.people).select()
+
     response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict(message=T('Welcome to web2py!'), userlist=userlist)
 
 
 def user():

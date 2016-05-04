@@ -1,52 +1,67 @@
-{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
 {{extend 'layout.html'}}
 
-{{block header}}
-    <header class="container-fluid background">
-      <div class="jumbotron text-center">
-        {{if response.title:}}
-        <h1>{{=response.title}}
-          <small>{{=response.subtitle or ''}}</small></h1>
-        {{pass}}
-      </div>
-    </header>
-{{end}}
+    <div id="main_login">
+    {{if auth.user_id is None:}}
+        {{=A('Sign Up', _class='btn btn-warning', _href=URL('default', 'user', args=['register']))}}
+        {{=A('Sign In', _class='btn btn-success', _href=URL('default', 'user', args=['login']))}}
+    {{else:}}
+        Welcome Back {{auth.user}}
 
-{{if 'message' in globals():}}
-<h2>{{=message}}</h2>
-<p class="lead">{{=T('How did you get here?')}}</p>
-<ol>
-  <li>{{=T('You are successfully running web2py')}}</li>
-  <li>{{=XML(T('You visited the url %s', A(request.env.path_info,_href=request.env.path_info)))}}</li>
-  <li>{{=XML(T('Which called the function %s located in the file %s',
-    (A(request.function+'()',_href='#'),
-    A('web2py/applications/%(application)s/controllers/%(controller)s.py' % request,
-    _href=URL('admin','default','peek', args=(request.application,'controllers',request.controller+'.py'))))))}}</li>
-  <li>{{=XML(T('The output of the file is a dictionary that was rendered by the view %s',
-    A('web2py/applications/%(application)s/views/%(controller)s/index.html' % request,
-    _href=URL('admin','default','peek',args=(request.application,'views',request.controller,'index.html')))))}}</li>
-  <li>{{=T('You can modify this application and adapt it to your needs')}}</li>
-</ol>
-{{elif 'content' in globals():}}
-{{=content}}
-{{else:}}
-{{=BEAUTIFY(response._vars)}}
-{{pass}}
+    {{pass}}
+    </div>
+    <div class = 'signinDiv'>
+        {{if auth.user_id is None:}}
+        {{else:}}
+            Please Choose a Visualization to begin
+        <div id="upload" class = "defaultDiv"><p>
+            <a href={{=URL('default', 'user', args=['change_password'])}}><p><button type="button" class="btn btn-danger"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Change Password</button></p></a>
+		</p>
+        </div>
 
-{{block right_sidebar}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title"><a class="btn-block"
-      href="{{=URL('admin','default','index')}}">
-      <i class="glyphicon glyphicon-cog"></i>
-      {{=T("admin")}}
-    </a></h3></div>
-  <div class="panel-body">
-    {{=T("Don't know what to do?")}}
-  </div>
-  <ul class="list-group">
-    <li class="list-group-item">{{=A(T("Online examples"), _href=URL('examples','default','index'))}}</li>
-    <li class="list-group-item"><a href="http://web2py.com">web2py.com</a></li>
-    <li class="list-group-item"><a href="http://web2py.com/book">{{=T('Documentation')}}</a></li>
-  </ul>
-</div>
-{{end}}
+
+        <div id="settingsuser" class="usersettingDiv">
+		    <a href={{=URL('default', 'user', args=['profile'])}}><p><button type="button" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;Change Profile Settings</button></p></a>
+		    <a href={{=URL('default', 'user', args=['change_password'])}}><p><button type="button" class="btn btn-danger"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Change Password</button></p></a>
+            <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
+
+    <div id="settingsprepage" class = "defaultDiv"><p>
+		<a href={{=URL('default', 'boardsettings', user_signature=True)}}><button type="button" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbspCustomize Board View</button></a>
+		<p><button type="button" class="btn btn-primary oauth" style="display: none;"><i class="fa fa-database" ></i>&nbsp;&nbsp;&nbsp;Set OAUTH Tokens</button></p>
+        <p><button type="button" class="btn btn-danger usetting"><i class="fa fa-cogs" ></i>&nbsp;&nbsp;&nbsp;User Settings</button></p>
+		<a href={{=URL('default', 'user', args=['logout'])}}><p><button type="button" class="btn btn-danger"><i class="fa fa-sign-out" ></i>&nbsp;&nbsp;&nbsp;Log Out</button></p></a>
+        <a href="{{=URL('default', 'credits')}}"><p><button type="button" class="btn btn-info"><i class="fa fa-info"></i>&nbsp;&nbsp;&nbsp;Credits</button></p></a>
+		<p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
+		</p>
+    </div>
+
+
+    <div id="settingsuser" class="usersettingDiv">
+		<a href={{=URL('default', 'user', args=['profile'])}}><p><button type="button" class="btn btn-primary"><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;Change Profile Settings</button></p></a>
+		<a href={{=URL('default', 'user', args=['change_password'])}}><p><button type="button" class="btn btn-danger"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Change Password</button></p></a>
+        <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
+    </div>
+	{{pass}}
+
+
+<script>
+//$('.usersettingDiv').hide();
+$('.defaultDiv').hide();
+
+$('.usetting').click(function () {
+    $('.defaultDiv').hide();
+    $('.signinDiv').hide();
+    $('.usersettingDiv').show(1000);
+});
+$('.back').click(function () {
+    $('.usersettingDiv').hide();
+    $('.signinDiv').show(1000);
+    $('.defaultDiv').hide();
+});
+$('.orangeset').click(function () {
+    $('.defaultDiv').show(1000);
+    $('.signinDiv').hide();
+    $('.usersettingDiv').hide();
+});
+</script>

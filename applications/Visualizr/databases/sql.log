@@ -53,3 +53,11 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2016-05-04T11:22:49.740000
+CREATE TABLE people(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    description TEXT
+);
+success!
