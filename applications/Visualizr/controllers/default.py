@@ -60,11 +60,10 @@ def call():
     return service()
 
 def upload_data():
-    form = SQLFORM.factory(
-        Field('upload_data', 'upload', uploadfolder=os.path.join(request.folder, 'static')))
+    form = SQLFORM(db.master_table, fields=['upload_data'])
     if form.process().accepted:
-        response.flash = 'form accepted'
-        session.upload_data = form.vars.upload_data
+        response.flash = 'Form Accepted'
+        """session.upload_data = form.vars.upload_data"""
     elif form.errors:
-        response.flash = 'Upload form Error'
+        response.flash = 'Upload Form Error'
     return dict(form = form)
