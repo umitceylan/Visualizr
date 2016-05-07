@@ -53,3 +53,13 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2016-05-05T16:12:23.522000
+CREATE TABLE master_table(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    upload_data CHAR(512),
+    tablename CHAR(512)
+);
+success!
+timestamp: 2016-05-05T17:32:12.875000
+ALTER TABLE master_table ADD person CHAR(512);
+success!
