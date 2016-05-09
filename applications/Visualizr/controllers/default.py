@@ -9,6 +9,7 @@
 # -------------------------------------------------------------------------
 
 import os
+import uuid
 
 def index():
     """
@@ -62,8 +63,20 @@ def call():
 def upload_data():
     form = SQLFORM(db.master_table, fields=['upload_data'])
     if form.process().accepted:
+        filter_table(form)
         response.flash = 'Form Accepted'
         """session.upload_data = form.vars.upload_data"""
     elif form.errors:
         response.flash = 'Upload Form Error'
     return dict(form = form)
+
+def filter_table(form):
+    if form.vars.upload_data is not None:
+        f = open("applications/Visualizr/static/" + form.vars.upload_data)
+    rows = f.readlines()
+    line = rows[0].strip()
+    columns = line.split(',')
+    uid = str(uuid.uuid1())
+    tablename = uid.replace('-','_')
+    db.define_table(tablename, *[Field(c) for c in columns])
+    master_entry = db(db.master_table.upload_data == form.vars.upload_data).update(table_id = tablename)
