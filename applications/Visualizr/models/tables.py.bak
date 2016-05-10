@@ -8,5 +8,5 @@ import os
 
 db.define_table('master_table',
              Field('person'),
-             Field('upload_data', 'upload', uploadfolder=os.path.join(request.folder, 'static')),
-             Field('table_id'))
+             Field('table_name', 'string', requires=IS_NOT_EMPTY()),
+             Field('upload_data', 'upload', uploadfolder=os.path.join(request.folder, 'static')))
