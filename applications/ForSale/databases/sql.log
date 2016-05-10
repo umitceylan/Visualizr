@@ -1013,3 +1013,23 @@ success!
 success!
 success!
 success!
+timestamp: 2016-05-01T14:19:46.807536
+CREATE TABLE test(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    file CHAR(512),
+    filename CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
