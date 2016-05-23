@@ -1,6 +1,6 @@
 {{extend 'layout.html'}}
 
-    <div id="main_login">
+<div id="main_login">
     {{if auth.user_id is None:}}
         {{=A('Sign Up', _class='btn btn-warning', _href=URL('default', 'user', args=['register']))}}
         {{=A('Sign In', _class='btn btn-success', _href=URL('default', 'user', args=['login']))}}
@@ -10,89 +10,21 @@
         <a href={{=URL('default', 'user', args=['change_password'])}}><p><button type="button" class="btn btn-danger"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Change Password</button></p></a>
 
     {{pass}}
-    </div>
-    Please Choose a Visualization to begin
-
-    <div id="upload" class = "defaultDiv">
-
-        <button type="button" class="btn btn-warning Vis1c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 1</button>
-        <button type="button" class="btn btn-warning Vis2c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 2</button>
-        <button type="button" class="btn btn-warning Vis3c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 3</button>
-
-
-    </div>
-
-    <div id="settingsuser" class="Vis1">
-		    <div>
-                 Visulaization 1
-                <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
-            </div>
-    </div>
-
-    <div id="settingsprepage" class = "Vis2"><p>
-
-        <div>
-            this is Visulaization 2
-        </div>
-		    <p>
-                <button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
-		    </p>
-    </div>
-
-    <div id="settingsuser" class="Vis3">
-		    <div>
-                this is Visulaization 3
-            </div>
-            <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
-    </div>
+</div>
 
 
 
+{{if len(maintable) > 0:}}
 
+    <table class='mytable' border="1" frame="void" rules="rows">
+        <tr class="myheader">
+            <th>Name</th>
+        </tr>
+        {{for m in maintable:}}
+        <tr >
+            <td>{{=A(m.table_name, _href=URL('default', 'visView', args=[m.id]))}}</td>
+        </tr>
+        {{pass}}
+    </table>
 
-
-	{{pass}}
-
-
-<script>
-$('.Vis1').hide();
-$('.Vis2').hide();
-$('.Vis3').hide();
-
-//$('.defaultDiv').hide();
-
-$('.Vis1c').click(function () {
-    $('.Vis1').show(1000);
-    $('.defaultDiv').hide();
-    $('.Vis2').hide();
-    $('.Vis3').hide();
-});
-
-$('.Vis2c').click(function () {
-    $('.Vis1').hide();
-    $('.defaultDiv').hide();
-    $('.Vis2').show(1000);
-    $('.Vis3').hide();
-});
-
-$('.Vis3c').click(function () {
-    $('.Vis1').hide();
-    $('.defaultDiv').hide();
-    $('.Vis2').hide();
-    $('.Vis3').show(1000);
-});
-
-$('.usetting').click(function () {
-    $('.defaultDiv').hide();
-    $('.signinDiv').hide();
-    $('.usersettingDiv').show(1000);
-});
-$('.back').click(function () {
-    $('.Vis1').hide();
-    $('.defaultDiv').show(1000);
-    $('.Vis2').hide();
-    $('.Vis3').hide();
-});
-
-
-</script>
+{{pass}}
