@@ -68,10 +68,10 @@ def call():
 def upload_data():
     print db.tables
     form = SQLFORM(db.master_table, fields=['table_name','upload_data'])
+    form.add_button('Cancel', URL('index'))
     if form.process().accepted:
-        #filter_table(form)
         response.flash = 'Form Accepted'
-        #display_table()
+        redirect(URL('index'))
         """session.upload_data = form.vars.upload_data"""
     elif form.errors:
         response.flash = 'Upload Form Error'

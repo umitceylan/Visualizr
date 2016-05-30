@@ -19,9 +19,13 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-
+    maintable = db(db.master_table).select()
     response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict(message=T('Welcome to web2py!'), maintable = maintable)
+
+def visView():
+    record = db.master_table(request.args[0])
+    return dict(record=record)
 
 
 def user():
@@ -64,10 +68,10 @@ def call():
 def upload_data():
     print db.tables
     form = SQLFORM(db.master_table, fields=['table_name','upload_data'])
+    form.add_button('Cancel', URL('index'))
     if form.process().accepted:
-        filter_table(form)
         response.flash = 'Form Accepted'
-        display_table()
+        redirect(URL('index'))
         """session.upload_data = form.vars.upload_data"""
     elif form.errors:
         response.flash = 'Upload Form Error'
@@ -79,8 +83,8 @@ def filter_table(form):
     rows = f.readlines()
     line = rows[0].strip()
     columns = line.split(',')
-    #tablename = form.vars.table_name
-    tablename = 'standss'
+    tablename = form.vars.table_name
+    #tablename = 'standss'
     db.define_table(tablename, *[Field(c) for c in columns])
     for r in range(1,len(rows)):
         row = rows[r].strip()
@@ -89,7 +93,6 @@ def filter_table(form):
             db[tablename][columns[index]] = entries[index]
     #master_entry = db(db.master_table.upload_data == form.vars.upload_data).update(table_id = tablename)
 
-    
 def display_table():
     print db.tables
     print db['standss']['stand']
