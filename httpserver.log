@@ -3531,3 +3531,5 @@ P/1.1, 200, 0.002000
 127.0.0.1, 2016-05-30 11:53:27, GET, /Visualizr/appadmin/hooks, HTTP/1.1, 200, 0.198000
 127.0.0.1, 2016-05-30 11:53:45, POST, /admin/default/edit/Visualizr/controllers/default.py, HTTP/1.1, 200, 0.042000
 127.0.0.1, 2016-05-30 11:53:45, POST, /admin/default/edit/Visualizr/controllers/default.py, HTTP/1.1, 200, 0.044000
+127.0.0.1, 2016-05-30 11:54:27, GET, /admin/default/todolist.load, HTTP/1.1, 200, 0.055000
+127.0.0.1, 2016-05-30 11:54:27, GET, /Visualizr/appadmin/hooks, HTTP/1.1, 200, 0.209000
