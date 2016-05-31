@@ -5972,3 +5972,7 @@ P/1.1, 200, 0.002000
 127.0.0.1, 2016-05-31 14:31:27, POST, /Visualizr/appadmin/update/db/master_table/1, HTTP/1.1, 303, 0.123840
 127.0.0.1, 2016-05-31 14:31:28, GET, /Visualizr/appadmin/select/db, HTTP/1.1, 200, 0.163088
 127.0.0.1, 2016-05-31 14:35:19, GET, /Visualizr/default/visView/23, HTTP/1.1, 200, 0.292971
+127.0.0.1, 2016-05-31 14:38:27, GET, /Visualizr/default/index, HTTP/1.1, 200, 0.332519
+127.0.0.1, 2016-05-31 14:38:27, GET, /Visualizr/default/assets/css/bootstrap.css, HTTP/1.1, 404, 0.059329
+127.0.0.1, 2016-05-31 14:38:27, GET, /Visualizr/default/assets/css/font-awesome.min.css, HTTP/1.1, 404, 0.110639
+127.0.0.1, 2016-05-31 14:38:27, GET, /Visualizr/default/assets/css/style.css, HTTP/1.1, 404, 0.171174
