@@ -1,5 +1,0 @@
-db = DAL("sqlite://storage.sqlite")
-
-db.define_table("friends",
-   Field("name"),
-   Field("last_name"))
