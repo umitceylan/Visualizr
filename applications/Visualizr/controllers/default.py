@@ -66,8 +66,7 @@ def call():
     return service()
 
 def upload_data():
-    print db.tables
-    form = SQLFORM(db.master_table, fields=['table_name','upload_data'])
+    form = SQLFORM(db.master_table, fields=['table_name', 'single_company','upload_data'])
     form.add_button('Cancel', URL('index'))
     if form.process().accepted:
         response.flash = 'Form Accepted'
