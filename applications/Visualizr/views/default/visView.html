@@ -75,7 +75,6 @@
     <div id="settingsuser" class="Vis1">
 		    <div id = "test1">
                  Visulaization 1
-                <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
             </div>
 <script>
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -182,7 +181,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}", function(error, data
     <div id="settingsuser" class="Vis2">
 		    <div id = "test2">
                  Visulaization 2
-                <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
+
             </div>
 <script>
 var margin = {top: 20, right: 80, bottom: 50, left: 80},
@@ -345,7 +344,7 @@ var city = svg2.selectAll(".city")
 		    <div>
                 this is Visulaization 3
             </div>
-            <p><button type="button" class="btn btn-warning back"><i class="fa fa-arrow-left"></i> Back</button>
+
     </div>
 
 <br>
@@ -397,21 +396,21 @@ $('.Vis3').hide();
 
 $('.Vis1c').click(function () {
     $('.Vis1').show(1000);
-    $('.defaultDiv').hide();
+
     $('.Vis2').hide();
     $('.Vis3').hide();
 });
 
 $('.Vis2c').click(function () {
     $('.Vis1').hide();
-    $('.defaultDiv').hide();
+
     $('.Vis2').show(1000);
     $('.Vis3').hide();
 });
 
 $('.Vis3c').click(function () {
     $('.Vis1').hide();
-    $('.defaultDiv').hide();
+
     $('.Vis2').hide();
     $('.Vis3').show(1000);
 });
