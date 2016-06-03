@@ -20,13 +20,17 @@ def index():
     return auth.wiki()
     """
     maintable = db(db.master_table).select()
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'), maintable = maintable)
+    return dict( maintable = maintable)
 
 def visView():
     record = db.master_table(request.args[0])
-    return dict(record=record)
+    check = 0
+    return dict(record=record, check=check)
 
+def visView2():
+    record = db.master_table(request.args[0])
+    check = 0
+    return dict(record=record, check=check)
 
 def user():
     """
@@ -95,3 +99,9 @@ def filter_table(form):
 def display_table():
     print db.tables
     print db['standss']['stand']
+
+@auth.requires_signature()
+def delete():
+    db(db.master_table.id == request.args(0)).delete()
+    session.flash = T('Post deleted successfully')
+    redirect(URL('default', 'index'))
