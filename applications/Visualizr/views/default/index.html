@@ -64,14 +64,14 @@
 
 {{if len(maintable) > 0:}}
 
-    <table class='mytable' border="1" frame="void" rules="rows">
+    <table class='mytable' border="1" frame="void" rules="rows" width="100%">
         <tr class="myheader">
             <th><font color = "grey"><h1>Single</h1></font></th>
         </tr>
         {{for m in maintable:}}
         {{if m.single_company:}}
         <tr >
-            <td>{{=A(m.table_name, _href=URL('default', 'visView', args=[m.id]))}}</td>
+            <td>{{=A(m.table_name, _href=URL('default', 'visView', args=[m.id,m.single_company]))}}</td>
             {{ if auth.user_id == m.uploader: }}
                    <td>{{=A('Delete',_href=URL('default', 'delete', args=[m.id], user_signature=True))}}</td>
             {{pass}}
@@ -82,14 +82,14 @@
 
     </table>
 
-     <table class='mytable' border="1" frame="void" rules="rows">
+     <table class='mytable' border="1" frame="void" rules="rows" width="100%">
         <tr class="myheader">
             <th><font color = "grey"><h1>Multi</h1></font></th>
         </tr>
         {{for m in maintable:}}
          {{if m.single_company == False:}}
         <tr >
-            <td>{{=A(m.table_name, _href=URL('default', 'visView', args=[m.id]))}}</td>
+            <td>{{=A(m.table_name, _href=URL('default', 'visView2', args=[m.id]))}}</td>
 
         </tr>
          {{pass}}

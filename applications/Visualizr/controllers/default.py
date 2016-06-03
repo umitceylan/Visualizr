@@ -24,8 +24,13 @@ def index():
 
 def visView():
     record = db.master_table(request.args[0])
-    return dict(record=record)
+    check = 0
+    return dict(record=record, check=check)
 
+def visView2():
+    record = db.master_table(request.args[0])
+    check = 0
+    return dict(record=record, check=check)
 
 def user():
     """
