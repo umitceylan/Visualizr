@@ -77,14 +77,13 @@
 
     <div id="settingsuser" class="Vis1">
 		    <div id = "test1">
-                 Visulaization 1
-            </div>
+        </div>
 <script>
 // Search "D3 Margin Convention" on Google to understand margins.
 var margin = {top: 10, right: 40, bottom: 150, left: 50},
     width = 760 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-    
+
 
 
 var svg1 = d3.select("#test1").append("svg")
@@ -95,7 +94,7 @@ var svg1 = d3.select("#test1").append("svg")
 
 
 
-// Define X and Y SCALE. 
+// Define X and Y SCALE.
 var xScale = d3.scale.ordinal()
     .rangeRoundBands([0,width], 0.1);
 
@@ -118,26 +117,26 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         d.firm = d.firm;
         d.revenue = +d.revenue;
     });
-    
 
-    
-    // Return X and Y SCALES (domain). See Chapter 7:Scales (Scott M.) 
+
+
+    // Return X and Y SCALES (domain). See Chapter 7:Scales (Scott M.)
     xScale.domain(data.map(function(d){ return d.firm; }));
     yScale.domain([0,d3.max(data, function(d) {return d.revenue; })]);
-    
+
     // Creating rectangular bars to represent the data. See D3 API Refrence
     // to learn more about Transitions
     svg1.selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
-        .attr("height", 0) 
+        .attr("height", 0)
         .attr("y", height)
         .transition().duration(1000)
         .delay( function(d,i) {
 			return i * 200;
 		})
-        // attributes can be also combined under one .attr 
+        // attributes can be also combined under one .attr
         .attr({
             "x": function(d) { return xScale(d.firm); },
             "y": function(d) { return yScale(d.revenue); },
@@ -146,7 +145,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
             // create increasing to decreasing shade of blue
             "fill": function(d,i) { return 'rgb(0, 0, ' + ((i * 30)+ 120) + ')'}
         });
-    
+
     // Label the data values(d.value)
     svg1.selectAll('text')
         .data(data)
@@ -158,7 +157,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
 		})
         .text(function(d){
             return d.revenue;
-        
+
         })
         .attr({
             "x": function(d){ return xScale(d.firm) + xScale.rangeBand()/2; },
@@ -169,7 +168,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
             "fill": 'white',
             "text-anchor": 'middle'
         });
-    
+
     // Draw xAxis and position the label
     svg1.append("g")
         .attr("class", "x axis")
@@ -181,8 +180,8 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         .attr("transform", "rotate(-60)" )
         .style("text-anchor", "end")
         .attr("font-size", "10px");
-        
-    
+
+
     // Draw yAxis and postion the label
     svg1.append("g")
         .attr("class", "y axis")
@@ -193,9 +192,9 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         .attr("dy", "-3em")
         .style("text-anchor", "middle")
         .text("Trillions of US Dollars ($)");
-      
+
 });
-     
+
 
  </script>
 
@@ -203,9 +202,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
 
     <div id="settingsuser" class="Vis2">
 		    <div id = "test2">
-                 Visulaization 2
-
-            </div>
+        </div>
 <script>
 var width = 960,
     height = 500,
@@ -258,7 +255,7 @@ function type(d) {
   d.revenue = +d.revenue;
   return d;
 }
-    
+
 function tweenPie(b) {
          b.innerRadius = 0;
          var i = d3.interpolate({
