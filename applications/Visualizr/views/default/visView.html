@@ -64,8 +64,8 @@
 
     <div id="upload" class = "defaultDiv">
 
-            <button type="button" class="btn btn-warning Vis3c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 3</button>
-            <button type="button" class="btn btn-warning Vis4c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 4</button>
+       <!--     <button type="button" class="btn btn-warning Vis3c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 3</button> -->
+        <!--    <button type="button" class="btn btn-warning Vis4c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 4</button> -->
             <button type="button" class="btn btn-warning Vis1c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 1</button>
             <button type="button" class="btn btn-warning Vis2c"><i class="fa-bar-chart" aria-hidden="true"></i>Vis 2</button>
 
@@ -242,7 +242,11 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}", type, function(error
 
   g.append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.firm); });
+      .style("fill", function(d) { return color(d.data.firm); })
+  .transition()
+            .ease("spring")
+            .duration(1000)
+            .attrTween("d", tweenPie);
 
   g.append("text")
       .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
@@ -254,6 +258,17 @@ function type(d) {
   d.revenue = +d.revenue;
   return d;
 }
+    
+function tweenPie(b) {
+         b.innerRadius = 0;
+         var i = d3.interpolate({
+         startAngle: 0,
+         endAngle: 0
+            }, b);
+            return function(t) {
+            return arc(i(t));
+            };
+        }
 
  </script>
     </div>

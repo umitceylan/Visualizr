@@ -87,7 +87,7 @@ var margin = {top: 10, right: 40, bottom: 150, left: 50},
     
 
 
-var svg = d3.select("#test1").append("svg")
+var svg1 = d3.select("#test1").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -127,7 +127,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
     
     // Creating rectangular bars to represent the data. See D3 API Refrence
     // to learn more about Transitions
-    svg.selectAll('rect')
+    svg1.selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
@@ -148,7 +148,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         });
     
     // Label the data values(d.value)
-    svg.selectAll('text')
+    svg1.selectAll('text')
         .data(data)
         .enter()
         .append('text')
@@ -171,7 +171,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         });
     
     // Draw xAxis and position the label
-    svg.append("g")
+    svg1.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
@@ -184,7 +184,7 @@ d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}",function(error, data)
         
     
     // Draw yAxis and postion the label
-    svg.append("g")
+    svg1.append("g")
         .attr("class", "y axis")
         .call(yAxis)
         .append("text")
@@ -226,7 +226,7 @@ var pie = d3.layout.pie()
     .sort(null)
     .value(function(d) { return d.revenue; });
 
-var svg = d3.select("#test2").append("svg")
+var svg2 = d3.select("#test2").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
@@ -235,14 +235,18 @@ var svg = d3.select("#test2").append("svg")
 d3.csv("/Visualizr/static/_2.14.4/{{=record.upload_data}}", type, function(error, data) {
   if (error) throw error;
 
-  var g = svg.selectAll(".arc")
+  var g = svg2.selectAll(".arc")
       .data(pie(data))
     .enter().append("g")
       .attr("class", "arc");
 
   g.append("path")
       .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.firm); });
+      .style("fill", function(d) { return color(d.data.firm); })
+  .transition()
+            .ease("spring")
+            .duration(1000)
+            .attrTween("d", tweenPie);
 
   g.append("text")
       .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
@@ -254,6 +258,17 @@ function type(d) {
   d.revenue = +d.revenue;
   return d;
 }
+    
+function tweenPie(b) {
+         b.innerRadius = 0;
+         var i = d3.interpolate({
+         startAngle: 0,
+         endAngle: 0
+            }, b);
+            return function(t) {
+            return arc(i(t));
+            };
+        }
 
  </script>
     </div>
